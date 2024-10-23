@@ -22,14 +22,14 @@ async def process_input(user_input):
         {"role": "system", "content": "Given the natural language description of variable R-groups from this chemical patent, extract all the individual possibilities for each R-group."},
         {"role": "user", "content": user_input}
     ])
-    st.write(possibilities)
+    st.write("Processing R-groups...")
 
     # Second API call
     permutations = await get_ai_response([
         {"role": "system", "content": "Given these extracted R-group possibilities, generate the SMILES string for each chemical possibility."},
         {"role": "user", "content": possibilities}
     ])
-    st.write(permutations)
+    st.write("Calculating permutations...")
 
     # Third API call
     smiles = await get_ai_response([
