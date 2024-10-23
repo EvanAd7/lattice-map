@@ -22,20 +22,18 @@ async def process_input(user_input):
         {"role": "system", "content": "Given the natural language description of variable R-groups from this chemical patent, extract all the individual possibilities for each R-group."},
         {"role": "user", "content": user_input}
     ])
-    st.write("Extracted R-group possibilities:")
     st.write(possibilities)
 
     # Second API call
     permutations = await get_ai_response([
-        {"role": "system", "content": "Given these extracted R-group possibilities, generate all possible permutations of the chemical given the R-groups."},
+        {"role": "system", "content": "Given these extracted R-group possibilities, generate all possible permutations of the chemical as a LIST."},
         {"role": "user", "content": possibilities}
     ])
-    st.write("Generated chemical permutations:")
     st.write(permutations)
 
     # Third API call
     smiles = await get_ai_response([
-        {"role": "system", "content": "Given these generated chemical permutations, generate the chemical SMILES string for each permutation."},
+        {"role": "system", "content": "Given these generated chemical permutations, generate the chemical SMILES string for each permutation, as a list. Generate ONLY the SMILES strings, nothing else."},
         {"role": "user", "content": permutations}
     ])
     st.write("Chemical SMILES strings:")
