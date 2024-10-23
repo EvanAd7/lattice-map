@@ -11,7 +11,7 @@ client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
 async def get_ai_response(messages):
     response = await client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=messages
     )
     return response.choices[0].message.content
@@ -26,14 +26,14 @@ async def process_input(user_input):
 
     # Second API call
     permutations = await get_ai_response([
-        {"role": "system", "content": "Given these extracted R-group possibilities, generate all possible permutations of the chemical as a LIST."},
+        {"role": "system", "content": "Given these extracted R-group possibilities, generate the SMILES string for each chemical possibility."},
         {"role": "user", "content": possibilities}
     ])
     st.write(permutations)
 
     # Third API call
     smiles = await get_ai_response([
-        {"role": "system", "content": "Given these generated chemical permutations, generate the chemical SMILES string for each permutation, as a list. Generate ONLY the SMILES strings, nothing else."},
+        {"role": "system", "content": "Given these generated SMILES strings based on the variable R-groups, generate the chemical SMILES string for each permutation of the chemical, as a list. Generate ONLY the SMILES strings, nothing else."},
         {"role": "user", "content": permutations}
     ])
     st.write("Chemical SMILES strings:")
