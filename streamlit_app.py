@@ -49,7 +49,7 @@ def process_input(user_input, template_smiles):
         For example, R1 might be verbally described as either a methyl or ethyl group. From this, you will output the SMILES codes for both a methyl and ethyl group, under R1. Output NOTHING but the variable groups, separated by newlines, followed by its SMILES code, separated by commas. Here is an example format:
         R1: C, CC
         R2: CC=C, CCC
-        R3: O"""
+        R3: [H]"""
         },
         {"role": "user", "content": user_input}
     ])
